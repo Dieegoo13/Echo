@@ -17,15 +17,15 @@
           <div class="col">
             <form action="/registrar" method="post">
               <div class="form-group">
-                <input type="text" name="nome" required  class="form-control" placeholder="Nome">
+                <input type="text" name="nome" required  value="<?= $this->view->usuario['nome']?>"  class="form-control" placeholder="Nome">
               </div>
               
               <div class="form-group">
-                <input type="text"  name="email"  required  class="form-control" placeholder="E-mail">
+                <input type="text"  name="email"  value="<?= $this->view->usuario['email']?>" required  class="form-control" placeholder="E-mail">
               </div>
 
               <div class="form-group">
-                <input type="password" name="senha" required  class="form-control" placeholder="Senha">
+                <input type="password" name="senha" required  value="<?= $this->view->usuario['senha']?>" class="form-control" placeholder="Senha">
               </div>
               
               <div class="mt-4 mb-4">
@@ -34,6 +34,14 @@
                 </small>
               </div>
               <button type="submit" class="btn btn-primary btn-block btn-inscrever">Inscrever-se</button>
+
+              <?php if ($this->view->erroCadastro && $this->view->erroCadastro):?>
+
+                <small class="form-text text-danger">
+                  Erro ao tentar realizar o cadastro, verifique se os campos foram preenchidos corretamente.
+                </small>
+
+              <?php endif; ?>
             </form>
           </div>
         </div>
