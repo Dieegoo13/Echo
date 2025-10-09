@@ -1,0 +1,108 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #000; /* fundo preto */
+  color: #eaeaea; /* texto branco padrão */
+}
+
+/* Títulos */
+h1, h2 {
+  font-weight: bold;
+  color: #fff; /* títulos brancos */
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+/* Banner */
+.banner {
+  height: 100%;
+  background-color: #0a0a0a; /* preto levemente acinzentado */
+}
+
+/* Títulos e subtítulos */
+.title {
+  color: #fff; /* título branco */
+  font-size: 27px;
+  line-height: 32px;
+}
+
+.subtitle {
+  color: #c39bd3; /* lilás claro */
+  font-size: 18px;
+  line-height: 24px;
+  margin: 16px auto;
+}
+
+/* Campos de formulário */
+.form-control {
+  background-color: #111; /* fundo escuro */
+  border: 1px solid #444; /* borda cinza neutra */
+  border-radius: 3px;
+  color: #eaeaea; /* texto branco */
+}
+
+.form-control::placeholder {
+  color: #888; /* placeholder cinza claro */
+}
+
+/* Área de comunicação */
+.comunicacao {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Itens de comunicação */
+.communicationItem {
+  color: #fff; /* agora branco, não roxo */
+  display: flex;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 24px;
+  margin: 48px auto;
+  position: relative;
+}
+
+/* Links */
+a {
+  color: #9b59b6; /* roxo principal ainda usado em links */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #c39bd3;
+  text-decoration: underline;
+}
+
+/* Card */
+.card-body {
+  background-color: #000;
+}
+
+/* Botões */
+.btn-inscrever,
+.btn-entrar {
+  background-color: #9b59b6;
+  border: none;
+  color: #fff; /* texto branco nos botões */
+  transition: 0.3s;
+}
+
+.btn-inscrever:hover,
+.btn-entrar:hover {
+  background-color: #c39bd3;
+  color: #000; /* texto escuro no hover */
+}
