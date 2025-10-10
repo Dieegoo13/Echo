@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg menu">
+    <div class="container">
+        <div class="navbar-nav">
+            <a class="menuItem" href="/timeline">Inicio</a>
+            <a class="menuItem" href="/sair">Sair</a>
+            <!-- <img src="/img/echo_logo.png" class="menuIco" /> -->
+			<a href="/timeline" class="menuIco">EC<span class="span-cor">H</span>O</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row pt-2">
+
+        <!-- Coluna Perfil -->
+        <div class="col-md-3">
+            <div class="perfil">
+                <div class="perfilTopo"></div>
+
+                <div class="perfilPainel">
+                    <div class="row mt-2 mb-2">
+                        <div class="col mb-2">
+                            <span class="perfilPainelNome">Nome do Usuário</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <span class="perfilPainelItem">Tweets</span><br />
+                            <span class="perfilPainelItemValor">0</span>
+                        </div>
+                        <div class="col">
+                            <span class="perfilPainelItem">Seguindo</span><br />
+                            <span class="perfilPainelItemValor">0</span>
+                        </div>
+                        <div class="col">
+                            <span class="perfilPainelItem">Seguidores</span><br />
+                            <span class="perfilPainelItemValor">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna Principal -->
+        <div class="col-md-6">
+
+            <!-- Card de Busca -->
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="get" action="/quem_seguir">
+                                <div class="input-group mb-3">
+                                    <input type="text" name="pesquisarPor"  class="form-control text-area" placeholder="Quem você está procurando?">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-inscrever" type="submit">Procurar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?php foreach($this->view->usuarios as $indice => $usuario):?>
+				<div class="row mb-2">
+					<div class="col">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6 text-white">
+										<?= $usuario['nome'] ?>
+									</div>
+
+									<div class="col-md-6 d-flex justify-content-end">
+										<div>
+											<a href="#" class="btn btn-inscrever">Seguir</a>
+											<a href="#" class="btn btn-danger">Deixar de seguir</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php endforeach;?>		
+        </div>
+    </div>
+</div>
