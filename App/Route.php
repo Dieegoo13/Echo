@@ -44,6 +44,12 @@ class Route extends Bootstrap {
 			'action' => 'sair'
 		);
 
+		$routes['echos'] = array(
+			'route' => '/echos',
+			'controller' => 'AppController',
+			'action' => 'echos'
+		);
+
 
 
 		$this->setRoutes($routes);

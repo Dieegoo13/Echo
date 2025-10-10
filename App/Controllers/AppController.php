@@ -1,29 +1,58 @@
-<?php 
+<?php
 
 namespace App\Controllers;
 
 //os recursos do miniframework
 
 use MF\Controller\Action;
+use MF\Model\Container;
 
-class AppController extends Action {
+class AppController extends Action
+{
 
 
-    public function timeline(){
+    public function timeline()
+    {
 
-        session_start();
+        $this->validaAutenticacao();
 
-        echo "chegamos aq";
+        $echo = Container::getModel('Echos');
 
-        if(!empty($_SESSION['id']) && !empty($_SESSION['nome'])){
-            $this->render('timeline');
-        }else{
-            header('Location: /?login=erro');
-        }
+        $echo->__set('id_usuario', $_SESSION['id']);
 
+        $echos = $echo->getAll();
+
+
+        $this->view->echos = $echos;
+
+        $this->render('timeline');
 
     }
 
-}
+    public function echos()
+    {
 
-?>
+        $this->validaAutenticacao();
+
+        $echos = Container::getModel('Echos');
+
+        $echos->__set('echo', $_POST['echo']);
+        $echos->__set('id_usuario', $_SESSION['id']);
+
+        $echos->salvar();
+
+        header('Location: /timeline');
+        exit;
+    }
+
+    public function validaAutenticacao()
+    {
+        session_start();
+
+        if (!isset($_SESSION['id']) || !isset($_SESSION['nome']) || empty($_SESSION['nome'])) {
+
+            header('Location: /?login=erro');
+            exit;
+        }
+    }
+}

@@ -1,3 +1,99 @@
-<h1>Timeline</h1>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg menu">
+    <div class="container">
+        <div class="navbar-nav">
+            <a class="menuItem" href="/timeline">
+                Início
+            </a>
 
-<a href="/sair" style="color: azure; text-decoration: none;">Sair</a>
+            <a class="menuItem" href="/sair">
+                Sair
+            </a>
+
+            <!-- Logo ECHO -->
+            <!-- <img src="/img/echo_logo.png" alt="Echo Logo" class="menuIco" /> -->
+            <a href="" class="menuIco">EC<span class="span-cor">H</span>O</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Conteúdo principal -->
+<div class="container mt-5">
+    <div class="row pt-4">
+
+        <!-- Coluna do perfil -->
+        <div class="col-md-3">
+            <div class="perfil">
+                <div class="perfilTopo"></div>
+
+                <div class="perfilPainel">
+                    <div class="row mt-2 mb-2">
+                        <div class="col mb-2">
+                            <span class="perfilPainelNome">Usuário ECHO</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <span class="perfilPainelItem">Posts</span><br />
+                            <span class="perfilPainelItemValor">0</span>
+                        </div>
+
+                        <div class="col">
+                            <span class="perfilPainelItem">Seguindo</span><br />
+                            <span class="perfilPainelItemValor">0</span>
+                        </div>
+
+                        <div class="col">
+                            <span class="perfilPainelItem">Seguidores</span><br />
+                            <span class="perfilPainelItemValor">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna principal (timeline) -->
+        <div class="col-md-6">
+            <div class="row mb-2">
+                <div class="col tweetBox">
+                    <form action="/echos" method="post">
+                        <textarea class="form-control text-area" name="echo" placeholder="O que você quer ecoar?" rows="3"></textarea>
+
+                        <div class="col mt-2 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-inscrever">Ecoar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <?php foreach ($this->view->echos as $id_echo => $echo): ?>
+
+                <div class="row tweet">
+                    <div class="col">
+                        <p><strong><?=$echo['nome']?></strong> <span class="text text-muted"><?=$echo['data']?></span></p>
+                        <p><?=$echo['echo']?></p>
+
+                        <form>
+                            <div class="col d-flex justify-content-end">
+                                <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
+
+        </div>
+
+        <!-- Coluna lateral (quem seguir) -->
+        <div class="col-md-3">
+            <div class="quemSeguir">
+                <span class="quemSeguirTitulo">Quem seguir</span>
+                <hr />
+                <a href="#" class="quemSeguirTxt">Descubra novos ecos</a>
+            </div>
+        </div>
+    </div>
+</div>
