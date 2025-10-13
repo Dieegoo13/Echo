@@ -82,6 +82,23 @@ class AppController extends Action
     }
 
 
+    public function remover()
+    {
+        $this->validaAutenticacao();
+
+        $id_echo = isset($_GET['id']) ? $_GET['id'] : '';
+
+        if(!empty($id_echo)){
+            $echos = Container::getModel('Echos');
+            $echos->__set('id_usuario', $_SESSION['id']);
+            $echos->__set('id', $id_echo);
+            $echos->removerEcho();
+        }
+
+        header('Location: /timeline');
+    }
+
+
     public function acao()
     {
         $this->validaAutenticacao();

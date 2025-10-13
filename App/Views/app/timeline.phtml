@@ -75,11 +75,14 @@
                         <p><strong><?=$echo['nome']?></strong> <span class="text text-muted"><?=$echo['data']?></span></p>
                         <p><?=$echo['echo']?></p>
 
-                        <form>
-                            <div class="col d-flex justify-content-end">
-                                <button type="submit" class="btn btn-danger btn-sm">Remover</button>
-                            </div>
-                        </form>
+
+                        <?php if($echo['id_usuario'] == $_SESSION['id']):?>
+                            <form action="/remover?id=<?= $echo['id'] ?>" method="post">
+                                <div class="col d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                                </div>
+                            </form>
+                        <?php endif;?>    
                     </div>
                 </div>
 

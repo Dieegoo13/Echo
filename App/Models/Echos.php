@@ -33,6 +33,22 @@ class Echos extends Model
         return $this;
     }
 
+    public function removerEcho(){
+
+        $query = "
+            DELETE FROM echos
+            WHERE id_usuario = :id_usuario
+            AND id = :id
+        ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+        $stmt->bindValue(':id', $this->__get('id'));
+        $stmt->execute();
+
+        return true;
+    }
+
     public function getAll(){
         $query = "
             SELECT 
@@ -44,6 +60,7 @@ class Echos extends Model
             FROM echos AS e
             LEFT JOIN tb_usuarios AS u ON e.id_usuario = u.id
             WHERE e.id_usuario = :id_usuario
+            OR e.id_usuario in (SELECT id_usuario_seguindo from usuarios_seguidores where id_usuario = :id_usuario)
             ORDER BY
                 e.data DESC
         ";
