@@ -13,21 +13,27 @@ class AppController extends Action
 
     public function timeline()
     {
-
         $this->validaAutenticacao();
 
+        // Model Echos → para listar os posts
         $echo = Container::getModel('Echos');
-
         $echo->__set('id_usuario', $_SESSION['id']);
-
         $echos = $echo->getAll();
-
-
         $this->view->echos = $echos;
+
+        // Model Usuario → para informações do perfil
+        $usuario = Container::getModel('Usuario'); // ← CORRIGIDO AQUI
+        $usuario->__set('id', $_SESSION['id']);
+
+        $this->view->info_usuario = $usuario->getInfoUser();
+        $this->view->total_echos = $usuario->getTotalEchos();
+        $this->view->total_seguindo = $usuario->getTotalSeguindo();
+        $this->view->total_seguidores = $usuario->getTotalSeguidores();
 
         $this->render('timeline');
 
     }
+
 
     public function echos()
     {
@@ -48,27 +54,29 @@ class AppController extends Action
 
     public function quemSeguir()
     {
-
         $this->validaAutenticacao();
 
         $pesquisarPor = isset($_GET['pesquisarPor']) ? $_GET['pesquisarPor'] : '';
 
+        $usuario = Container::getModel('Usuario');
+        $usuario->__set('id_usuario', $_SESSION['id']);
+
+        $this->view->info_usuario = $usuario->getInfoUser() ?: [];
+        $this->view->total_echos = $usuario->getTotalEchos() ?: 0;
+        $this->view->total_seguindo = $usuario->getTotalSeguindo() ?: 0;
+        $this->view->total_seguidores = $usuario->getTotalSeguidores() ?: 0;
+
         $usuarios = [];
 
         if (!empty($pesquisarPor)) {
-            
-            $usuario = Container::getModel('Usuario');
             $usuario->__set('nome', $pesquisarPor);
-            $usuario->__set('id_usuario', $_SESSION['id']);
             $usuarios = $usuario->getAll();
-
         }
 
         $this->view->usuarios = $usuarios;
-
         $this->render('quemSeguir');
-
     }
+
 
     public function validaAutenticacao()
     {

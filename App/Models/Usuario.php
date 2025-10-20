@@ -160,5 +160,49 @@ class Usuario extends Model
 
         return true;
     }
+
+    public function getInfoUser(){
+
+        $query = "SELECT nome FROM tb_usuarios where id = :id_usuario";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id')); 
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO:: FETCH_ASSOC);
+    }
+
+    public function getTotalEchos(){
+
+        $query = "SELECT count(*) as total_echos FROM echos where id_usuario = :id_usuario";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id')); 
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO:: FETCH_ASSOC);
+    }
+
+    public function getTotalSeguindo(){
+
+        $query = "SELECT count(*) as total_seguindo FROM usuarios_seguidores WHERE id_usuario_seguindo  = :id_usuario";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id')); 
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO:: FETCH_ASSOC);
+    }
+
+    public function getTotalSeguidores(){
+
+        $query = "SELECT count(*) as total_seguidores FROM usuarios_seguidores WHERE id_usuario_seguindo = :id_usuario";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id')); 
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO:: FETCH_ASSOC);
+    }
     
 }

@@ -1,9 +1,8 @@
 <nav class="navbar navbar-expand-lg menu">
     <div class="container">
         <div class="navbar-nav">
-            <a class="menuItem" href="/timeline">Inicio</a>
+            <a class="menuItem" href="/timeline">Início</a>
             <a class="menuItem" href="/sair">Sair</a>
-            <!-- <img src="/img/echo_logo.png" class="menuIco" /> -->
             <a href="/timeline" class="menuIco">EC<span class="span-cor">H</span>O</a>
         </div>
     </div>
@@ -18,24 +17,34 @@
                 <div class="perfilTopo"></div>
 
                 <div class="perfilPainel">
+                    <!-- Nome do usuário -->
                     <div class="row mt-2 mb-2">
                         <div class="col mb-2">
-                            <span class="perfilPainelNome">Nome do Usuário</span>
+                            <span class="perfilPainelNome">
+                                <?= htmlspecialchars($this->view->info_usuario['nome'] ?? 'Usuário') ?>
+                            </span>
                         </div>
                     </div>
 
+                    <!-- Estatísticas -->
                     <div class="row mb-2">
                         <div class="col">
-                            <span class="perfilPainelItem">Tweets</span><br />
-                            <span class="perfilPainelItemValor">0</span>
+                            <span class="perfilPainelItem">Posts</span><br />
+                            <span class="perfilPainelItemValor">
+                                <?= htmlspecialchars($this->view->total_echos['total_echos'] ?? 0) ?>
+                            </span>
                         </div>
                         <div class="col">
                             <span class="perfilPainelItem">Seguindo</span><br />
-                            <span class="perfilPainelItemValor">0</span>
+                            <span class="perfilPainelItemValor">
+                                <?= htmlspecialchars($this->view->total_seguindo['total_seguindo'] ?? 0) ?>
+                            </span>
                         </div>
                         <div class="col">
                             <span class="perfilPainelItem">Seguidores</span><br />
-                            <span class="perfilPainelItemValor">0</span>
+                            <span class="perfilPainelItemValor">
+                                <?= htmlspecialchars($this->view->total_seguidores['total_seguidores'] ?? 0) ?>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -52,7 +61,13 @@
                         <div class="card-body">
                             <form method="get" action="/quem_seguir">
                                 <div class="input-group mb-3">
-                                    <input type="text" name="pesquisarPor" class="form-control text-area" placeholder="Quem você está procurando?">
+                                    <input 
+                                        type="text" 
+                                        name="pesquisarPor" 
+                                        class="form-control text-area" 
+                                        placeholder="Quem você está procurando?"
+                                        value="<?= htmlspecialchars($_GET['pesquisarPor'] ?? '') ?>"
+                                    >
                                     <div class="input-group-append">
                                         <button class="btn btn-inscrever" type="submit">Procurar</button>
                                     </div>
@@ -63,32 +78,40 @@
                 </div>
             </div>
 
-            <?php foreach ($this->view->usuarios as $indice => $usuario): ?>
-                <div class="row mb-2">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6 text-white">
-                                        <?= $usuario['nome'] ?>
+            <!-- Resultados da busca -->
+            <?php if (!empty($this->view->usuarios)): ?>
+                <?php foreach ($this->view->usuarios as $usuario): ?>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 text-white">
+                                            <?= htmlspecialchars($usuario['nome']) ?>
+                                        </div>
 
-                                    </div>
-
-                                    <div class="col-md-6 d-flex justify-content-end">
-                                        <div>
-                                            <?php if ($usuario['seguindo_sn'] == 0): ?>
-                                                <a href="/acao?acao=seguir&id_usuario=<?= $usuario['id'] ?>" class="btn btn-inscrever">Seguir</a>
-                                            <?php else: ?>
-                                                <a href="/acao?acao=deixar_de_seguir&id_usuario=<?= $usuario['id'] ?>" class="btn btn-danger">Deixar de seguir</a>
-                                            <?php endif; ?>
+                                        <div class="col-md-6 d-flex justify-content-end">
+                                            <div>
+                                                <?php if ($usuario['seguindo_sn'] == 0): ?>
+                                                    <a href="/acao?acao=seguir&id_usuario=<?= $usuario['id'] ?>" class="btn btn-inscrever">
+                                                        Seguir
+                                                    </a>
+                                                <?php else: ?>
+                                                    <a href="/acao?acao=deixar_de_seguir&id_usuario=<?= $usuario['id'] ?>" class="btn btn-danger">
+                                                        Deixar de seguir
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php elseif (isset($_GET['pesquisarPor']) && $_GET['pesquisarPor'] !== ''): ?>
+                <div class="alert alert-warning text-center">Nenhum usuário encontrado.</div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
