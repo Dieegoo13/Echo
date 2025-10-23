@@ -78,7 +78,7 @@ git clone https://github.com/Dieegoo13/ECHO.git
 ````
 <h2 id="preview">📸 Preview do Projeto</h2>
 
-![Tela de Login](img/login_echo.png)
-![Timeline](img/timeline_echo.png)
-![Quem Seguir](img/quemseguir_echo.png)
+![Tela de Login](public/img/login_echo.png)
+![Timeline](public/img/timeline_echo.png)
+![Quem Seguir](public/img/quemseguir_echo.png)
 
